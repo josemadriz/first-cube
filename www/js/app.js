@@ -4,6 +4,7 @@
 // except for 'app' ones, which are in a sibling
 // directory.
 requirejs.config({
+    urlArgs: 'buster=' + new Date().getTime(),
     baseUrl: 'js/lib',
     paths: {
         app: '../app'

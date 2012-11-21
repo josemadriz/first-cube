@@ -1,8 +1,11 @@
 define(function (require) {
-    // Load any app-specific modules
-    // with a relative require call,
-    // like:
-    // var util = require('./util');
-
-    console.log('Hello world');
+    var Backbone = require('Backbone');
+    var MainApp = Backbone.View.extend({
+      initialize: function () {
+        console.log(this.options.message);
+      }
+    });
+    new MainApp({
+      message: 'Hello world!'
+    });
 });

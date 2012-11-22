@@ -1,0 +1,58 @@
+body {
+  background-color: #666;
+  color: white;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: bold;
+}
+
+/*
+   Perspective example:
+   http://www.webkit.org/blog-files/3d-transforms/perspective-by-example.html
+*/
+#experiment {
+  margin-top: 100px;
+  -webkit-perspective: 800;
+  -webkit-perspective-origin: 50% 200px;
+}
+
+#cube {
+  position: relative;
+  margin: 0 auto;
+  height: 300px;
+  width: 300px;
+  -webkit-transition: -webkit-transform 0.5s linear;
+  -webkit-transform-style: preserve-3d;
+}
+
+.face {
+  position: absolute;
+  height: 240px;
+  width: 240px;
+  padding: 20px;
+  background-color: rgba(50, 50, 50, 0.7);
+  border: 2px solid #333;
+}
+
+#cube .one {
+  -webkit-transform: rotateX(90deg) translateZ(150px);
+}
+
+#cube .two {
+  -webkit-transform: translateZ(150px);
+}
+
+#cube .three {
+  -webkit-transform: rotateY(90deg) translateZ(150px);
+}
+
+#cube .four {
+  -webkit-transform: rotateY(180deg) translateZ(150px);
+}
+
+#cube .five {
+  -webkit-transform: rotateY(-90deg) translateZ(150px);
+}
+
+#cube .six {
+  -webkit-transform: rotateX(-90deg) translateZ(150px) rotate(180deg);
+}

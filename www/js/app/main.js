@@ -1,24 +1,29 @@
 define(function (require) {
-    var Backbone = require('Backbone');
-    var MainApp = Backbone.View.extend({
-      initialize: function () {
-        console.log(this.options.message);
-        this.render();
-      },
-      render: function () {
-        this.$('a').css('display', 'block');
-        this.$el.append(this.make('h1', null, 'Hello World!'));
-        this.$el.css('background-color', 'pink');
-        this.$('h1')
-          .css('background-color', 'white')
-          .css('color', 'red')
-          .css('padding', '30px')
-          .css('margin', '30px');
-        return this;
+  var $ = require('jquery');
+  var xAngle = 0, yAngle = 0,
+      transform = 'rotateX(${xAngle}deg) rotateY(${yAngle}deg)';
+  $(function () {
+    $('body').keydown(function (e) {
+      var transformed;
+      console.log(e.keyCode);
+      switch(e.keyCode) {
+        case 37:
+        yAngle -= 90;
+        break;
+        case 38:
+        xAngle -= 90;
+        break;
+        case 39:
+        yAngle += 90;
+        break;
+        case 40:
+        xAngle -= 90;
+        break;
       }
+      transformed = transform
+        .replace('${xAngle}', xAngle)
+        .replace('${yAngle}', yAngle);
+      $('#cube').css('webkitTransform', transformed)
     });
-    new MainApp({
-      message: 'Hello world!',
-      el: 'body'
-    });
+  });
 });

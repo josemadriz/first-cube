@@ -6,8 +6,13 @@ define(function (require) {
         this.render();
       },
       render: function () {
-        this.$el.css('background-color', 'yellow');
-        this.$('h1').css('background-color', 'red');
+        this.$el.append(this.make('h1', null, 'Hello World!'));
+        this.$el.css('background-color', 'pink');
+        this.$('h1')
+          .css('background-color', 'white')
+          .css('color', 'red')
+          .css('padding', '30px')
+          .css('margin', '30px');
         return this;
       }
     });

@@ -6,6 +6,7 @@ define(function (require) {
         this.render();
       },
       render: function () {
+        this.$('a').css('display', 'block');
         this.$el.append(this.make('h1', null, 'Hello World!'));
         this.$el.css('background-color', 'pink');
         this.$('h1')

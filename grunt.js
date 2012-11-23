@@ -10,6 +10,15 @@ module.exports = function(grunt) {
         browser: true
       }
     },
+    less: {
+      development: {
+        options: {
+        },
+        files: {
+          'www/css/app.css': 'www/less/app.less'
+        }
+      }
+    },
     server: {
       port: 8000,
       base: 'www'
@@ -22,13 +31,15 @@ module.exports = function(grunt) {
     },
     watch: {
       files: ['www/**/*'],
-      tasks: 'reload'
+      tasks: 'less reload'
     }
   });
 
   grunt.loadNpmTasks('grunt-sample');
   grunt.loadNpmTasks('grunt-volo');
   grunt.loadNpmTasks('grunt-reload');
+  grunt.loadNpmTasks('grunt-contrib-less');
+
   grunt.registerTask('default', 'lint sample server');
 
 };

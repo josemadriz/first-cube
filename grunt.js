@@ -31,15 +31,14 @@ module.exports = function(grunt) {
     },
     watch: {
       files: ['www/**/*'],
-      tasks: 'less reload'
+      tasks: 'lint less reload'
     }
   });
 
-  grunt.loadNpmTasks('grunt-sample');
   grunt.loadNpmTasks('grunt-volo');
   grunt.loadNpmTasks('grunt-reload');
   grunt.loadNpmTasks('grunt-contrib-less');
 
-  grunt.registerTask('default', 'lint sample server');
+  grunt.registerTask('default', 'server lint less reload watch');
 
 };

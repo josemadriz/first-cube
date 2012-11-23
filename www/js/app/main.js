@@ -1,8 +1,22 @@
 define(function (require) {
   var $ = require('jquery');
-  var auto = true,
+  var auto = false,
       xAngle = 0, yAngle = 0,
+      transformCount = 0,
+      every = 3,
+      colorProvider = [
+        'rgb(105, 210, 231)',
+        'rgb(167, 219, 216)',
+        'rgb(224, 228, 204)',
+        'rgb(243, 134, 48)',
+        'rgb(250, 105, 0)',
+      ],
+      colors = [],
       transform = 'rotateX(${xAngle}deg) rotateY(${yAngle}deg)';
+
+  var getColors = function () {
+    return colorProvider.slice();
+  };
 
   var toggleMode = function (playMode) {
     if (playMode) play();
@@ -22,6 +36,11 @@ define(function (require) {
     $('#cube').off('webkitTransitionEnd');
   }
 
+  var changeBackground = function () {
+    if (!colors.length) colors = getColors();
+    $('body').css('background-color', colors.pop());
+  }
+
   var applyTransform = function (newX, newY) {
     var transformed;
     xAngle = newX;
@@ -29,7 +48,9 @@ define(function (require) {
     transformed = transform
       .replace('${xAngle}', xAngle)
       .replace('${yAngle}', yAngle);
-    $('#cube').css('webkitTransform', transformed)
+    $('#cube').css('webkitTransform', transformed);
+    transformCount += 1;
+    if (transformCount % every === 0) changeBackground();
   };
 
   var applyRandomTransform = function () {
@@ -51,9 +72,7 @@ define(function (require) {
   };
 
   var coinFlip = function (heads, tails) {
-    return function () {
-      return Math.random() < 0.5 ? heads : tails;
-    }();
+    return Math.random() < 0.5 ? heads : tails;
   };
 
   $(function () {

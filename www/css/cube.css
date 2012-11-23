@@ -1,14 +1,16 @@
 body {
-  background-color: #666;
+  background-color: rgba(105, 210, 231, 0.3);
   color: white;
   font-family: Helvetica, Arial, sans-serif;
   font-weight: bold;
+  -webkit-transition: background-color 0.5s ease-in;
 }
 
 a {
   color: white;
   text-decoration: none;
   text-transform: uppercase;
+  text-shadow: 1px 1px 2px #666;
 }
 
 a:hover, a:active {
@@ -29,7 +31,7 @@ a:hover, a:active {
   margin: 0 auto;
   height: 300px;
   width: 300px;
-  -webkit-transition: -webkit-transform 0.25s linear;
+  -webkit-transition: -webkit-transform 0.3s linear;
   -webkit-transform-style: preserve-3d;
 }
 
@@ -38,17 +40,17 @@ a:hover, a:active {
   height: 260px;
   width: 260px;
   padding: 20px;
-  background-color: rgba(50, 50, 50, 0.9);
+  border: 2px solid white;
 }
 
 #cube .one {
-  -webkit-transform: rotateX(90deg) translateZ(150px);
-  background-color: rgba(105, 210, 231, 0.9);
+  -webkit-transform: translateZ(150px);
+  background-color: rgba(167, 219, 216, 0.9);
 }
 
 #cube .two {
-  -webkit-transform: translateZ(150px);
-  background-color: rgba(167, 219, 216, 0.9);
+  -webkit-transform: rotateX(90deg) translateZ(150px);
+  background-color: rgba(105, 210, 231, 0.9);
 }
 
 #cube .three {

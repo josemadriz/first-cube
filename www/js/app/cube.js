@@ -9,7 +9,7 @@ define(function (require) {
   var $ = require('jquery'),
       configurator = require('app/configurator'),
 
-      auto = false,
+      auto = true,
       xAngle = 0, yAngle = 0, zAngle = 0,
       transformCount = 0,
       every = 5,
@@ -106,8 +106,8 @@ define(function (require) {
         toggle = 32, // Space
         values  = {
           '#slow':    2,
-          '#normal':  0.8,
-          '#fast':    0.2,
+          '#normal':  1,
+          '#fast':    0.4,
           '#intense': 30,
           '#mild':    800,
           '#flat':    100000,
@@ -134,7 +134,6 @@ define(function (require) {
     $('a.speed').click(function(e) {
       shutUp(e);
       configurator.setSpeed(getValue($(this)));
-      if (!auto) play();
     });
 
     $('a.perspective').click(function(e) {

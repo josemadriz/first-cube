@@ -1,15 +1,22 @@
+/**
+ * FirstCube
+ *
+ * The first cube experiment
+ *
+ * @author leoncoto@gmail.com
+ */
 define(function (require) {
   var $ = require('jquery');
   var auto = true,
       xAngle = 0, yAngle = 0, zAngle = 0,
       transformCount = 0,
-      every = 3,
+      every = 5,
       colorProvider = [
-        'rgb(105, 210, 231)',
-        'rgb(167, 219, 216)',
-        'rgb(224, 228, 204)',
-        'rgb(243, 134, 48)',
-        'rgb(250, 105, 0)'
+        'rgba(105, 210, 231, 0.3)',
+        'rgba(167, 219, 216, 0.3)',
+        'rgba(224, 228, 204, 0.3)',
+        'rgba(243, 134, 48, 0.3)',
+        'rgba(250, 105, 0, 0.3)'
       ],
       colors = [],
       transform = 'rotateX(${xAngle}deg) rotateY(${yAngle}deg) rotateZ(${zAngle}deg)';
@@ -35,14 +42,40 @@ define(function (require) {
     auto = false;
     $('a.play-mode').html('play');
     $('#cube').off('webkitTransitionEnd', applyRandomTransform);
-    if (xAngle !== 0 || yAngle !== 0 || zAngle !== 0) {
-      reset();
-    }
+  };
+
+  var atZeros = function () {
+    return xAngle === 0 && yAngle === 0 && zAngle === 0;
+  };
+
+  var willChange = function (newX, newY, newZ) {
+    return newX !== xAngle || newY !== yAngle || newZ !== zAngle;
   };
 
   var reset = function () {
-    console.log('reset');
-    applyTransform(0, 0, 0);
+    if (!atZeros()) {
+      $('#cube').on('webkitTransitionEnd', resetOneStep);
+      resetOneStep();
+    }
+  };
+
+  var resetOneStep = function () {
+    var newX, newY, newZ;
+    if (atZeros()) $('#cube').off('webkitTransitionEnd', resetOneStep);
+    else {
+      newX = stepBack(xAngle);
+      newY = stepBack(yAngle);
+      newZ = stepBack(zAngle);
+      applyTransform(newX, newY, newZ);
+    }
+  };
+
+  var stepBack = function (angle) {
+    var newAngle;
+    if (angle === 0) newAngle = angle;
+    else if (angle > 0) newAngle = angle - 90;
+    else if (angle < 0) newAngle = angle + 90;
+    return newAngle;
   };
 
   var changeBackground = function () {
@@ -91,10 +124,6 @@ define(function (require) {
 
     if (auto) play();
 
-    $('#cube').on('webkitTransitionEnd', function () {
-      console.log(xAngle, yAngle, zAngle);
-    });
-
     $('a.play-mode').click(function(e) {
       e.preventDefault();
       e.stopPropagation();
@@ -104,8 +133,7 @@ define(function (require) {
     $('a.reset').click(function(e) {
       e.preventDefault();
       e.stopPropagation();
-      if (auto) stop();
-      reset();
+         reset();
     });
 
     var up     = 38,
@@ -114,39 +142,44 @@ define(function (require) {
         right  = 39,
         zLeft  = 65, // A
         zRight = 83; // S
+        toggle = 32; // Space
 
     $('body').keydown(function (e) {
-      var newX = xAngle, newY = yAngle, newZ = zAngle;
+      var newX = xAngle, newY = yAngle, newZ = zAngle, keyCode = e.keyCode;
 
-      switch(e.keyCode) {
-        case up:
-        newX -= 90;
-        break;
+      if(keyCode === toggle) toggleMode();
+      else {
+        switch(keyCode) {
+          case up:
+          newX -= 90;
+          break;
 
-        case down:
-        newX += 90;
-        break;
+          case down:
+          newX += 90;
+          break;
 
-        case left:
-        newY += 90;
-        break;
+          case left:
+          newY += 90;
+          break;
 
-        case right:
-        newY -= 90;
-        break;
+          case right:
+          newY -= 90;
+          break;
 
-        case zLeft:
-        newZ += 90;
-        break;
+          case zLeft:
+          newZ += 90;
+          break;
 
-        case zRight:
-        newZ -= 90;
-        break;
+          case zRight:
+          newZ -= 90;
+          break;
+        }
+        if (willChange(newX, newY, newZ)) {
+          if (auto) stop();
+          applyTransform(newX, newY, newZ);
+        }
       }
-      if ((newX !== xAngle) || newY !== yAngle || newZ !== zAngle) {
-        if (auto) stop();
-        applyTransform(newX, newY, newZ);
-      }
+
     });
   });
 });

@@ -38,7 +38,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-volo');
   grunt.loadNpmTasks('grunt-reload');
   grunt.loadNpmTasks('grunt-contrib-less');
-  grunt.loadNpmTasks('grunt-remove-logging');
 
   grunt.registerTask('default', 'server lint less reload watch');
 

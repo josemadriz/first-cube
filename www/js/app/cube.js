@@ -98,14 +98,13 @@ define(function (require) {
   };
 
   var applyRandomTransform = function () {
-    var newX, newY;
-    newX = randomAngle();
-    newY = randomAngle();
-    newZ = randomAngle();
-    if ((newX === xAngle) && (newY === yAngle) && (newZ === zAngle))
-        applyRandomTransform();
-    else
+    var newX = randomAngle(),
+        newY = randomAngle(),
+        newZ  = randomAngle();
+    if (willChange(newX, newY, newZ))
       applyTransform(newX, newY, newZ);
+    else
+      applyRandomTransform();
   };
 
   var randomAngle = function () {

@@ -1,3 +1,16 @@
+# First Cube
+
+Based on http://www.webkit.org/blog-files/3d-transforms/perspective-by-example.html
+
+## Grunt tasks:
+  * grunt-volo
+  * grunt-reload
+  * grunt-contrib-less
+
+## Node dependencies:
+  * Volo
+  * Less
+
 This web project has the following setup:
 
 * www/ - the web assets for the project

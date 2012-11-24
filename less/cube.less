@@ -1,0 +1,43 @@
+/*
+   Perspective example:
+   http://www.webkit.org/blog-files/3d-transforms/perspective-by-example.html
+*/
+@translate: (@size / 2) * @transFactor;
+
+body {
+  background-color: rgba(105, 210, 231, 0.3);
+}
+
+#cube {
+  position: relative;
+  margin: 0 auto;
+  -webkit-transform-style: preserve-3d;
+}
+
+.face {
+  position: absolute;
+}
+
+#cube .one {
+  background-color: rgba(167, 219, 216, 0.9);
+}
+
+#cube .two {
+  background-color: rgba(105, 210, 231, 0.9);
+}
+
+#cube .three {
+  background-color: rgba(224, 228, 204, 0.9);
+}
+
+#cube .four {
+  background-color: rgba(243, 134, 48, 0.9);
+}
+
+#cube .five {
+  background-color: rgba(250, 105, 0, 0.9);
+}
+
+#cube .six {
+  background-color: rgba(105, 210, 231, 0.9);
+}

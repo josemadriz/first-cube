@@ -5,6 +5,5 @@ requirejs.config({
         app: '../app'
     }
 });
-
 requirejs(['app/cube']);
 

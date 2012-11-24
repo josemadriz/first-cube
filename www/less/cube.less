@@ -1,61 +1,43 @@
+@translate: (@size / 2) * @transFactor;
+
 /*
    Perspective example:
    http://www.webkit.org/blog-files/3d-transforms/perspective-by-example.html
 */
 body {
   background-color: rgba(105, 210, 231, 0.3);
-  -webkit-transition: background-color @colorSpeed ease-in;
-}
-
-#camera {
-  margin-top: @top;
-  -webkit-perspective: @perspective;
-  // -webkit-perspective: 800px;
 }
 
 #cube {
   position: relative;
   margin: 0 auto;
-  height: @cubeSize;
-  width: @cubeSize;
-  -webkit-transition: -webkit-transform @speed linear;
   -webkit-transform-style: preserve-3d;
 }
 
 .face {
   position: absolute;
-  height: @size;
-  width: @size;
-  // border: 10px solid white;
-  // border-radius: 40px;
 }
 
 #cube .one {
-  -webkit-transform: translateZ(@translate);
   background-color: rgba(167, 219, 216, 0.9);
 }
 
 #cube .two {
-  -webkit-transform: rotateX(90deg) translateZ(@translate);
   background-color: rgba(105, 210, 231, 0.9);
 }
 
 #cube .three {
-  -webkit-transform: rotateY(90deg) translateZ(@translate);
   background-color: rgba(224, 228, 204, 0.9);
 }
 
 #cube .four {
-  -webkit-transform: rotateY(180deg) translateZ(@translate);
   background-color: rgba(243, 134, 48, 0.9);
 }
 
 #cube .five {
-  -webkit-transform: rotateY(-90deg) translateZ(@translate);
   background-color: rgba(250, 105, 0, 0.9);
 }
 
 #cube .six {
-  -webkit-transform: rotateX(-90deg) translateZ(@translate) rotate(180deg);
   background-color: rgba(105, 210, 231, 0.9);
 }

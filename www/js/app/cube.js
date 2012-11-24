@@ -6,8 +6,10 @@
  * @author leoncoto@gmail.com
  */
 define(function (require) {
-  var $ = require('jquery');
-  var auto = true,
+  var $ = require('jquery'),
+      configurator = require('app/configurator'),
+
+      auto = false,
       xAngle = 0, yAngle = 0, zAngle = 0,
       transformCount = 0,
       every = 5,
@@ -50,32 +52,6 @@ define(function (require) {
 
   var willChange = function (newX, newY, newZ) {
     return newX !== xAngle || newY !== yAngle || newZ !== zAngle;
-  };
-
-  var reset = function () {
-    if (!atZeros()) {
-      $('#cube').on('webkitTransitionEnd', resetOneStep);
-      resetOneStep();
-    }
-  };
-
-  var resetOneStep = function () {
-    var newX, newY, newZ;
-    if (atZeros()) $('#cube').off('webkitTransitionEnd', resetOneStep);
-    else {
-      newX = stepBack(xAngle);
-      newY = stepBack(yAngle);
-      newZ = stepBack(zAngle);
-      applyTransform(newX, newY, newZ);
-    }
-  };
-
-  var stepBack = function (angle) {
-    var newAngle;
-    if (angle === 0) newAngle = angle;
-    else if (angle > 0) newAngle = angle - 90;
-    else if (angle < 0) newAngle = angle + 90;
-    return newAngle;
   };
 
   var changeBackground = function () {
@@ -121,27 +97,70 @@ define(function (require) {
 
   $(function () {
 
-    if (auto) play();
-
-    $('a.play-mode').click(function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      toggleMode();
-    });
-
-    $('a.reset').click(function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-         reset();
-    });
-
     var up     = 38,
         down   = 40,
         left   = 37,
         right  = 39,
         zLeft  = 65, // A
-        zRight = 83; // S
-        toggle = 32; // Space
+        zRight = 83, // S
+        toggle = 32, // Space
+        values  = {
+          '#slow':    2,
+          '#normal':  0.8,
+          '#fast':    0.2,
+          '#intense': 30,
+          '#mild':    800,
+          '#flat':    100000,
+          '#tiny':    20,
+          '#regular': 200,
+          '#huge':    2000
+        },
+        getValue = function ($el) {
+          var key = $el.attr('href');
+          return values[key];
+        },
+        shutUp = function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        };
+
+    if (auto) play(); else stop();
+
+    $('a.play-mode').click(function(e) {
+      shutUp(e);
+      toggleMode();
+    });
+
+    $('a.speed').click(function(e) {
+      shutUp(e);
+      configurator.setSpeed(getValue($(this)));
+      if (!auto) play();
+    });
+
+    $('a.perspective').click(function(e) {
+      shutUp(e);
+      configurator.setPerspective(getValue($(this)));
+    });
+
+    $('a.size').click(function(e) {
+      shutUp(e);
+      configurator.setSize(getValue($(this)));
+    });
+
+    $('a.shape').click(function(e) {
+      shutUp(e);
+      $(this).html(configurator.toggleRounded() ? 'Squared' : 'Rounded');
+    });
+
+    $('a.translation').click(function(e) {
+      shutUp(e);
+      $(this).html(configurator.toggleTrans() ? 'Tidy' : 'Loose');
+    });
+
+    $('a.border').click(function (e) {
+      shutUp(e);
+      $(this).html(configurator.toggleBorder() ? 'Without border' : 'With border');
+    });
 
     $('body').keydown(function (e) {
       var newX = xAngle, newY = yAngle, newZ = zAngle, keyCode = e.keyCode;

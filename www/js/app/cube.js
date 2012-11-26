@@ -9,7 +9,7 @@ define(function (require) {
   var $ = require('jquery'),
       configurator = require('app/configurator'),
 
-      auto = true,
+      auto = false,
       xAngle = 0, yAngle = 0, zAngle = 0,
       transformCount = 0,
       every = 5,
@@ -37,6 +37,7 @@ define(function (require) {
     auto = true;
     $('a.play-mode').html('stop');
     $('#cube').on('webkitTransitionEnd', applyRandomTransform);
+    $('#cube').on('transitionend', applyRandomTransform);
     applyRandomTransform();
   };
 
@@ -44,6 +45,7 @@ define(function (require) {
     auto = false;
     $('a.play-mode').html('play');
     $('#cube').off('webkitTransitionEnd', applyRandomTransform);
+    $('#cube').off('transitionend', applyRandomTransform);
   };
 
   var atZeros = function () {
@@ -69,6 +71,7 @@ define(function (require) {
       .replace('${yAngle}', yAngle)
       .replace('${zAngle}', zAngle);
     $('#cube').css('webkitTransform', transformed);
+    $('#cube').css('transform', transformed);
     transformCount += 1;
     if (transformCount % every === 0) changeBackground();
   };

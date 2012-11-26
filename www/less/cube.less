@@ -6,38 +6,69 @@
 
 body {
   background-color: rgba(105, 210, 231, 0.3);
+
+  -webkit-transition: background-color @speed ease-in;
+  transition: background-color @speed ease-in;
+}
+
+#camera {
+  margin-top: @top;
+  -webkit-perspective: @perspective;
+  perspective: @perspective;
 }
 
 #cube {
   position: relative;
   margin: 0 auto;
+  height: @size;
+  width: @size;
+
   -webkit-transform-style: preserve-3d;
+  -webkit-transition: -webkit-transform @speed linear;
+  transform-style: preserve-3d;
+  transition: transform @speed linear;
 }
 
 .face {
   position: absolute;
+  height: @size;
+  width: @size;
+  border: @borderStyle;
+  border-radius: @borderRadius;
 }
 
 #cube .one {
   background-color: rgba(167, 219, 216, 0.9);
+  -webkit-transform: translateZ(@translate);
+  transform: translateZ(@translate);
 }
 
 #cube .two {
   background-color: rgba(105, 210, 231, 0.9);
+  -webkit-transform: rotateX(90deg) translateZ(@translate);
+  transform: rotateX(90deg) translateZ(@translate);
 }
 
 #cube .three {
   background-color: rgba(224, 228, 204, 0.9);
+  -webkit-transform: rotateY(90deg) translateZ(@translate);
+  transform: rotateY(90deg) translateZ(@translate);
 }
 
 #cube .four {
   background-color: rgba(243, 134, 48, 0.9);
+  -webkit-transform: rotateY(180deg) translateZ(@translate);
+  transform: rotateY(180deg) translateZ(@translate);
 }
 
 #cube .five {
   background-color: rgba(250, 105, 0, 0.9);
+  -webkit-transform: rotateY(-90deg) translateZ(@translate);
+  transform: rotateY(-90deg) translateZ(@translate);
 }
 
 #cube .six {
   background-color: rgba(105, 210, 231, 0.9);
+  -webkit-transform: rotateX(-90deg) translateZ(@translate);
+  transform: rotateX(-90deg) translateZ(@translate);
 }

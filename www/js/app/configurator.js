@@ -15,21 +15,33 @@ define(function (require) {
         setTranslation = function () {
           var trans = size / 2;
           translation = loose ? trans + 100 : trans;
+
           $('#cube .one').css('-webkit-transform', 'translateZ(' + translation + 'px)');
           $('#cube .two').css('-webkit-transform', 'rotateX(90deg) translateZ(' + translation + 'px)');
           $('#cube .three').css('-webkit-transform', 'rotateY(90deg) translateZ(' + translation + 'px)');
           $('#cube .four').css('-webkit-transform', 'rotateY(180deg) translateZ(' + translation + 'px)');
           $('#cube .five').css('-webkit-transform', 'rotateY(-90deg) translateZ(' + translation + 'px)');
           $('#cube .six').css('-webkit-transform', 'rotateX(-90deg) rotate(180deg) translateZ(' + translation + 'px)');
+
+          $('#cube .one').css('transform', 'translateZ(' + translation + 'px)');
+          $('#cube .two').css('transform', 'rotateX(90deg) translateZ(' + translation + 'px)');
+          $('#cube .three').css('transform', 'rotateY(90deg) translateZ(' + translation + 'px)');
+          $('#cube .four').css('transform', 'rotateY(180deg) translateZ(' + translation + 'px)');
+          $('#cube .five').css('transform', 'rotateY(-90deg) translateZ(' + translation + 'px)');
+          $('#cube .six').css('transform', 'rotateX(-90deg) rotate(180deg) translateZ(' + translation + 'px)');
       };
 
     return {
       setSpeed: function (speed) {
         $('body').css('-webkit-transition', 'background-color ' + speed + 's ease-in');
         $('#cube').css('-webkit-transition', '-webkit-transform ' + speed + 's linear');
+
+        $('body').css('transition', 'background-color ' + speed + 's ease-in');
+        $('#cube').css('transition', 'transform ' + speed + 's linear');
       },
       setPerspective: function (perspective) {
         $('#camera').css('-webkit-perspective', perspective + 'px');
+        $('#camera').css('perspective', perspective + 'px');
       },
       setSize: function (newSize) {
         size = newSize;

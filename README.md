@@ -3,14 +3,19 @@
 Based on http://www.webkit.org/blog-files/3d-transforms/perspective-by-example.html
 
 ## Grunt tasks:
-  * grunt-volo
-  * grunt-reload
-  * grunt-contrib-less
+  * grunt-volo /remove
+  * grunt-reload https://github.com/webxl/grunt-reload
+  * grunt-contrib-less /remove
+  * grunt-contrib-compass : https://github.com/gruntjs/grunt-contrib-compass
+  * grunt-bower-task : https://github.com/yatskevich/grunt-bower-task
 
 ## Node dependencies:
-  * Volo
-  * Less
+  * Volo /remove
+  * Bower
+  * Less /remove
+  * sass-compass https://npmjs.org/package/node-compass
 
+## TODO: review VOLO structure
 ## Volo default setup:
 This web project has the following setup:
 
@@ -20,11 +25,11 @@ This web project has the following setup:
         * app.js - the top-level config script used by index.html
         * app/ - the directory to store project-specific scripts.
         * lib/ - the directory to hold third party scripts.
-* tools/ - the build tools to optimize the project.
+* tools/ - the build tools to optimize the project. 
 
 To optimize, run:
 
-    volo build
+    volo build // TODO: something more gruntlike https://github.com/asciidisco/grunt-requirejs
 
 This will run the "build" command in the volofile that is in this directory.
 
